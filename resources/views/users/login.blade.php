@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
 <div class="row my-4">
-    <div class="col-md-8 mx-auto">
+    <div class="col-md-14 mx-auto">
         <div class="card bg-light border border-primary shadow-sm">
 
             <h3 class="card-header ">
@@ -17,7 +17,9 @@
         <div class="form-group ">
 
       <label for="password">Password</label>
-        <input type="password" name="password" id="" class="form-control" placeholder="Mot de passe..." aria-describedy="helpId">
+        <input type="password" name="password" id="" class="form-control" placeholder="Mot de passe..." aria-describedy="helpId" style="
+    margin-bottom: 1rem;
+">
     <div class="form-group">
    <button type="submit" class="btn btn-primary">Valider</button>
    </div>

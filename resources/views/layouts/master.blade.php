@@ -17,8 +17,10 @@
     <div class="col-md-6 mx-auto my-4">
         @include('includes.messages')
    </div>
-   <div class="container my-3 border border-primary">
-   <div class="header h-50 bg-primary rounded shadow-sm">
+   <div class="container my-3 border border-primary" style="
+    padding: 0;
+">
+   <div class="header h-100 bg-primary rounded shadow-sm">
    <ul class="nav">
      <li class="nav-item">
        <a class="nav-link text-white" href="#">Acceuil</a>
