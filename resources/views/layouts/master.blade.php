@@ -15,7 +15,7 @@
    <div class="container">
    <div class="row">
     <div class="col-md-6 mx-auto my-4">
-        @include('includes.messages')
+        <!-- @include('includes.messages') -->
    </div>
    <div class="container my-3 border border-primary" style="
     padding: 0;
@@ -26,11 +26,12 @@
        <a class="nav-link text-white" href="#">Acceuil</a>
      @auth
         </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="{{route('users.profile',auth()->user()->id)}}">{{auth()->user()->name}}</a>
-          </li>
+          
           <li class="nav-item">
             <a class="nav-link text-white" href="{{route('baladesadmin.index')}}">admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{{route('baladesadmin.create')}}">admin create balade</a>
           </li>
           <li class="nav-item">
 <form action="{{route('users.logout')}}"method="post" >

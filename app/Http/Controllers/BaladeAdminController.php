@@ -47,10 +47,11 @@ class BaladeAdminController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:posts|max:255',
+            'name' => 'required|max:255',
             'address' => 'required',
             'mobile' => 'required',
             'quantity' => 'required|numeric',
+            'date'=>['required', 'after:' .  date('Y-m-d')],
             'Status' => 'required'
         ]);
 
@@ -111,7 +112,7 @@ class BaladeAdminController extends Controller
 
         if (isset($balade)) {
             $validator = Validator::make($request->all(), [
-                'name' => 'required|unique:posts|max:255',
+                'name' => 'required|max:255',
                 'address' => 'required',
                 'mobile' => 'required',
                 'quantity' => 'required|numeric',

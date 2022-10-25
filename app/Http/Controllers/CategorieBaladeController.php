@@ -47,7 +47,7 @@ class CategorieBaladeController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:posts|max:255',
+            'name' => 'required|max:255',
             'price' => 'required|numeric',
         ]);
         if ($validator->fails()) {
@@ -127,7 +127,7 @@ class CategorieBaladeController extends Controller
         $catbalade = CategorieBalade::find($id);
         if (isset($catbalade)) {
             $validator = Validator::make($request->all(), [
-                'name' => 'required|unique:posts|max:255',
+                'name' => 'required|max:255',
                 'price' => 'required|numeric',
             ]);
             if ($validator->fails()) {

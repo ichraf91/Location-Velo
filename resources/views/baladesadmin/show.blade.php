@@ -21,7 +21,7 @@
                 </p>
                 <p class="d-flex flex-row justify-content-star">
                     <!-- show categoriebalade name that has the same balades_id -->
-                    <span class="badge badge-primary mr-3">Categorie : {{$balades->categoriebalade->name}}</span>
+                    <!-- <span class="badge badge-primary mr-3">Categorie : {{$balades->categoriebalade->name}}</span> -->
            
                 </p>
                 <p>            

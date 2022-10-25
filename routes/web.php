@@ -40,10 +40,10 @@ Route::get('/balades/{id}', [BaladeController::class, 'show'])->name('balades.sh
 
 //BaladeAdminController Routes
 Route::get('/baladesadmin', [BaladeAdminController::class, 'index'])->name('baladesadmin.index');
+Route::get('/baladesadmin/create', [BaladeAdminController::class, 'create'])->name('baladesadmin.create');
 Route::get('/baladesadmin/{id}', [BaladeAdminController::class, 'show'])->name('baladesadmin.show');
 Route::get('/baladesadmin/{id}/edit', [BaladeAdminController::class, 'edit'])->name('baladesadmin.edit');
 Route::put('/baladesadmin/{id}', [BaladeAdminController::class, 'update'])->name('baladesadmin.update');
-Route::get('/baladesadmin/create', [BaladeAdminController::class, 'create'])->name('baladesadmin.create');
 Route::post('/baladesadmin', [BaladeAdminController::class, 'store'])->name('baladesadmin.store');
 Route::delete('/baladesadmin/{id}', [BaladeAdminController::class, 'destroy'])->name('baladesadmin.destroy');
 
