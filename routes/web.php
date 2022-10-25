@@ -1,12 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BikeController;
+use App\Http\Controllers\ParticipationController;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\CommandController;
-
-use Illuminate\Http\Resources\Json\ResourceCollection;
-
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,15 +14,20 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+Route::get('/', [EventsController::class, 'index']);
 
-Route::get('/', [BikeController::class, 'index']);
-Route::resource('/bikes', BikeController::class);
-Route::resource('/commands', CommandController::class);
-Route::get('/commands/{id}/create', [CommandController::class, 'create'])->name('command.create');
+Route::resource('/events', EventsController::class);
+Route::resource('/participations', ParticipationController::class);
+Route::post('/participations/pdf/{eventId}/{userId}', [ParticipationController::class, 'generatePDF'])->name('participations.pdf');
 
 Route::get('/login', [UsersController::class, 'login'])->name('users.login');
 Route::post('/auth', [UsersController::class, 'auth'])->name('users.auth');
-Route::post('/logout', [UsersController::class, 'logout'])->name('users.logout');
+//Route::post('/logout', [UsersController::class, 'logout'])->name('users.logout');
+Route::get('/logout', [UsersController::class, 'logout'])->name('users.logout');
 Route::get('/register', [UsersController::class, 'create'])->name('users.register');
 Route::post('/register', [UsersController::class, 'register'])->name('users.register');
 Route::get('/user/{id}/profile', [UsersController::class, 'show'])->name('users.profile');

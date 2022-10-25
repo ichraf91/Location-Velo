@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class BaladeMigration extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,12 @@ class BaladeMigration extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('participations', function (Blueprint $table) {
+            $table->id();
+            $table->integer('eventId');
+            $table->integer('userId');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +28,6 @@ class BaladeMigration extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('participations');
     }
-}
+};
