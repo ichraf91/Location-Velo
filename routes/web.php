@@ -41,10 +41,12 @@ Route::delete('/balades/{id}', [BaladeController::class, 'destroy'])->name('bala
 
 
 //CategorieBaladeController Routes
+
 Route::get('/categorie_balades', [CategorieBaladeController::class, 'index'])->name('categorie_balades.index');
 Route::get('/categorie_balades/create', [CategorieBaladeController::class, 'create'])->name('categorie_balades.create');
 Route::post('/categorie_balades', [CategorieBaladeController::class, 'store'])->name('categorie_balades.store');
 Route::get('/categorie_balades/{id}', [CategorieBaladeController::class, 'show'])->name('categorie_balades.show');
+Route::get('/balades_by_categorie_balade/{id}', [CategorieBaladeController::class, 'findBaladesbyCategorieBaladeId'])->name('balades.show');
 Route::get('/categorie_balades/{id}/edit', [CategorieBaladeController::class, 'edit'])->name('categorie_balades.edit');
 Route::put('/categorie_balades/{id}', [CategorieBaladeController::class, 'update'])->name('categorie_balades.update');
 Route::delete('/categorie_balades/{id}', [CategorieBaladeController::class, 'destroy'])->name('categorie_balades.destroy');
