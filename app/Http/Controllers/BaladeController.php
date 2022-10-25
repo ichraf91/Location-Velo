@@ -27,7 +27,11 @@ class BaladeController extends Controller
     public function show($id)
     {
         $balade = Balade::find($id);
-        return view('baladesclient.show')->with('balades', $balade);
+        if (isset($balade)) {
+            return view('baladesclient.show')->with('balades', $balade);
+        } else {
+            return redirect('baladesclient')->with('flash_message', 'Balade not found!');
+        }
     }
 
 }
