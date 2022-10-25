@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Balade;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BaladeAdminController extends Controller
 {
+
+    //function to see if the user is logged in
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +24,7 @@ class BaladeAdminController extends Controller
     public function index()
     {
         $balades = Balade::all();
-        return view ('baladesadmin.index')->with('balades', $balades);
+        return view('baladesadmin.index')->with('balades', $balades);
     }
 
     /**
@@ -36,6 +45,20 @@ class BaladeAdminController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:posts|max:255',
+            'address' => 'required',
+            'mobile' => 'required',
+            'quantity' => 'required|numeric',
+            'Status' => 'required'
+        ]);
+
+        //if validation fails redirect to the same page with errors
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $input = $request->all();
         Balade::create($input);
         return redirect('baladesadmin')->with('flash_message', 'Balade has been added!');
@@ -59,10 +82,15 @@ class BaladeAdminController extends Controller
      * @param  \App\Models\Balade  $balade
      * @return \Illuminate\Http\Response
      */
-    public function edit( $id)
+    public function edit($id)
     {
         $balade = Balade::find($id);
-        return view('baladesadmin.edit')->with('balades', $balade);
+        //check if balade exists before redirecting to edit view else redirect to baladesadmin.index
+        if (isset($balade)) {
+            return view('baladesadmin.edit')->with('balades', $balade);
+        } else {
+            return redirect('baladesadmin')->with('flash_message', 'Balade not found!');
+        }
     }
 
     /**
@@ -75,9 +103,27 @@ class BaladeAdminController extends Controller
     public function update(Request $request, $id)
     {
         $balade = Balade::find($id);
-        $input = $request->all();
-        $balade->update($input);
-        return redirect('baladesadmin')->with('flash_message', 'Balade has been updated!');
+
+        if (isset($balade)) {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|unique:posts|max:255',
+                'address' => 'required',
+                'mobile' => 'required',
+                'quantity' => 'required|numeric',
+                'Status' => 'required'
+            ]);
+
+            //if validation fails redirect to the same page with errors
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            } else {
+                $input = $request->all();
+                $balade->update($input);
+                return redirect('baladesadmin')->with('flash_message', 'Balade has been updated!');
+            }
+        }else{
+            return redirect('baladesadmin')->with('flash_message', 'Balade not found!');
+        }
     }
 
     /**
@@ -89,7 +135,12 @@ class BaladeAdminController extends Controller
     public function destroy($id)
     {
         $balade = Balade::find($id);
-        $balade->delete();
-        return redirect('baladesadmin')->with('flash_message', 'Balade has been deleted!');
+        if (isset($balade)) {
+            $balade->delete();
+            return redirect('baladesadmin')->with('flash_message', 'Balade has been deleted!');
+        } else {
+            return redirect('baladesadmin')->with('flash_message', 'Balade not found!');
+        }
+        
     }
 }

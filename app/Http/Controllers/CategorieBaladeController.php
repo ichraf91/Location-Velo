@@ -15,7 +15,7 @@ class CategorieBaladeController extends Controller
     public function index()
     {
         $catbalades = CategorieBalade::all();
-        return view ('catBalade.index')->with('balades', $balades);
+        return view ('catBalade.index')->with('balades', $catbalades);
     }
 
     /**
