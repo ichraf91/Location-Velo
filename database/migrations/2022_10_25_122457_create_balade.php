@@ -25,7 +25,7 @@ class CreateBalade extends Migration
             $table->string("image")->default("https://www.allibert-trekking.com/iconographie/17/CA1_vtt-baroque-en-haute-maurienne.jpg");
             $table->string("quantity")-> nullable();
             $table->string("discount_price")-> nullable();   
-            $table->Enums('status', ['Started', 'Finished','Pending'])->default('Pending');   
+            $table->enum('status', ['Started', 'Finished','Pending'])->default('Pending');   
             $table->timestamps();
         });
     }
