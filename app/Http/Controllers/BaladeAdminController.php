@@ -73,7 +73,12 @@ class BaladeAdminController extends Controller
     public function show($id)
     {
         $balade = Balade::find($id);
-        return view('baladesadmin.show')->with('balades', $balade);
+        if (isset($balade)) {
+            return view('baladesadmin.show')->with('balades', $balade);
+        } else {
+            return redirect('baladesadmin')->with('flash_message', 'Balade not found!');
+        }
+        
     }
 
     /**
