@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BikeController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CommandController;
+use App\Http\Controllers\BaladeController;
+use App\Http\Controllers\BaladeAdminController;
+use App\Http\Controllers\CategorieBaladeController;
+
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -32,16 +36,18 @@ Route::get('/user/{id}/profile', [UsersController::class, 'show'])->name('users.
 
 //BaladeController Routes
 Route::get('/balades', [BaladeController::class, 'index'])->name('balades.index');
-Route::get('/balades/create', [BaladeController::class, 'create'])->name('balades.create');
-Route::post('/balades', [BaladeController::class, 'store'])->name('balades.store');
 Route::get('/balades/{id}', [BaladeController::class, 'show'])->name('balades.show');
-Route::get('/balades/{id}/edit', [BaladeController::class, 'edit'])->name('balades.edit');
-Route::put('/balades/{id}', [BaladeController::class, 'update'])->name('balades.update');
-Route::delete('/balades/{id}', [BaladeController::class, 'destroy'])->name('balades.destroy');
 
+//BaladeAdminController Routes
+Route::get('/baladesadmin', [BaladeAdminController::class, 'index'])->name('baladesadmin.index');
+Route::get('/baladesadmin/{id}', [BaladeAdminController::class, 'show'])->name('baladesadmin.show');
+Route::get('/baladesadmin/{id}/edit', [BaladeAdminController::class, 'edit'])->name('baladesadmin.edit');
+Route::put('/baladesadmin/{id}', [BaladeAdminController::class, 'update'])->name('baladesadmin.update');
+Route::get('/baladesadmin/create', [BaladeAdminController::class, 'create'])->name('baladesadmin.create');
+Route::post('/baladesadmin', [BaladeAdminController::class, 'store'])->name('baladesadmin.store');
+Route::delete('/baladesadmin/{id}', [BaladeAdminController::class, 'destroy'])->name('baladesadmin.destroy');
 
 //CategorieBaladeController Routes
-
 Route::get('/categorie_balades', [CategorieBaladeController::class, 'index'])->name('categorie_balades.index');
 Route::get('/categorie_balades/create', [CategorieBaladeController::class, 'create'])->name('categorie_balades.create');
 Route::post('/categorie_balades', [CategorieBaladeController::class, 'store'])->name('categorie_balades.store');
