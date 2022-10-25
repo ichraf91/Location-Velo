@@ -14,7 +14,8 @@ class CategorieBaladeController extends Controller
      */
     public function index()
     {
-        //
+        $catbalades = CategorieBalade::all();
+        return view ('catBalade.index')->with('balades', $balades);
     }
 
     /**
@@ -24,7 +25,7 @@ class CategorieBaladeController extends Controller
      */
     public function create()
     {
-        //
+        return view('catBalade.create');
     }
 
     /**
@@ -35,7 +36,9 @@ class CategorieBaladeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        CategorieBalade::create($input);
+        return redirect('catBalade')->with('flash_message', 'Categorie Balade has been added!');
     }
 
     /**
@@ -44,9 +47,10 @@ class CategorieBaladeController extends Controller
      * @param  \App\Models\CategorieBalade  $categorieBalade
      * @return \Illuminate\Http\Response
      */
-    public function show(CategorieBalade $categorieBalade)
+    public function show($id)
     {
-        //
+        $catbalade = CategorieBalade::find($id);
+        return view('baladesclient.show')->with('balades', $catbalade);
     }
 
     /**
@@ -55,9 +59,11 @@ class CategorieBaladeController extends Controller
      * @param  \App\Models\CategorieBalade  $categorieBalade
      * @return \Illuminate\Http\Response
      */
-    public function edit(CategorieBalade $categorieBalade)
+    public function edit($id)
     {
-        //
+        $catbalade = CategorieBalade::find($id);
+        return view('catbalade.edit')->with('catbalade', $catbalade);
+        
     }
 
     /**
@@ -67,9 +73,12 @@ class CategorieBaladeController extends Controller
      * @param  \App\Models\CategorieBalade  $categorieBalade
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CategorieBalade $categorieBalade)
+    public function update(Request $request, $id)
     {
-        //
+        $catbalade = CategorieBalade::find($id);
+        $input = $request->all();
+        $catbalade->update($input);
+        return redirect('/catbalade')->with('flash_message', 'Updated!');
     }
 
     /**
@@ -78,8 +87,9 @@ class CategorieBaladeController extends Controller
      * @param  \App\Models\CategorieBalade  $categorieBalade
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CategorieBalade $categorieBalade)
+    public function destroy($id)
     {
-        //
+        CategorieBalade::destroy($id);
+        return redirect('/catbalade')->with('flash_message', 'deleted!');
     }
 }
