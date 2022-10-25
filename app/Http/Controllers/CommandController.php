@@ -32,7 +32,7 @@ class CommandController extends Controller
     public function create($id)
     {
 
-    return view('commands.create')->withBike(Bike::findOrFail($id));
+    return view('commands.create')->with(Bike::findOrFail($id));
         //
     }
 
@@ -82,7 +82,7 @@ class CommandController extends Controller
     public function show(Command $command)
     {
         //
-                return view('commands.show')->withCommand($command);
+                return view('commands.show')->with($command);
 
     }
 
