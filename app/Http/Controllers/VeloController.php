@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Velo;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\New_;
+use PhpParser\Node\Stmt\Catch_;
 
 class VeloController extends Controller
 {
@@ -12,10 +15,13 @@ class VeloController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $data = Velo::orderBy('id','desc')->paginate(10)->setPath('velos');
-        return view('velos.index',compact(['data']));
+        $velos = Velo::where('category_id', $id)->orderBy('id','desc')->paginate(10)->setPath('velos');
+        return view ('velos.index',compact('id'))->with('velos', $velos);
+       # $data = Velo::orderBy('id','desc')->paginate(10)->setPath('velos');
+      #  return view('velos.index',compact(['data']));
+
     }
 
     /**
@@ -23,36 +29,39 @@ class VeloController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('velos.create');
+      $categories=Category::find($id);
+        return view('velos.create')->with('categories', $categories);
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(Request $request)
     {
     $request->validate([
         'marque' => 'required',
-        'modele' => 'required',
+        'description' => 'required|min:5',
         'photo' => 'mimes:jpg,png,jpeg|max:5048'
         ]);
+        $fileName=time().$request->file('photo')->getClientOriginalName();
+        $path=$request->file('photo')->storeAs('images',$fileName,'public');
+        $requestData["photo"]='/storage'.$path;
+        $velo=new Velo();
+        $velo->marque=$request->marque;
+        $velo->description=$request->description;
+        $velo->photo=$path;
+        $velo->category_id=$request->category_id;
+        $velo->save();
        
 
-            $requestData=$request->all();
-           $fileName=time().$request->file('photo')->getClientOriginalName();
-            $path=$request->file('photo')->storeAs('images',$fileName,'public');
-            $requestData["photo"]='/storage'.$path;
-            Velo::create($requestData);
+           # $requestData=$request->all();
+          
+          #  Velo::create($requestData);
             
        
        
-            return redirect()->back()->with('flash_message','Create Successfully');
+            return redirect('/category/velos/'.$request->category_id)->with('message','Added');
        # return redirect('velos.index')->with('flash_message', 'Velo Addedd!');
     }
 
@@ -78,7 +87,7 @@ class VeloController extends Controller
     {
         
        $data = Velo::find($id);
-       return view('velos.edit',compact(['data']));
+       return view('velos.edit')->with('velos',$data);
     }
 
     /**
@@ -90,11 +99,11 @@ class VeloController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request,$id)
-    {
-        $velo = ['marque'=>$request->marque,'modele'=>$request->modele,
+    {$data=Velo::find($id);
+        $velo = ['marque'=>$request->marque,'description'=>$request->description,
             ];
         Velo::whereId($id)->update($velo) ;
-        return  redirect()->route('velos.index')
+        return  redirect('/category/velos/'.$request->category_id)
             ->with('info','Velo updated successfully.');}
 
     /**

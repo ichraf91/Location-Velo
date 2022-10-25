@@ -15,10 +15,17 @@ class CreateVelosTable extends Migration
     {
         Schema::create('velos', function (Blueprint $table) {
             $table->bigIncrements('id');
+            #$table->unsignedBigInteger('Category_id');
             $table->String('marque');
-            $table->string('modele');
+           # $table->String('slug');
+            $table->string('description');
             $table->string('photo');
-        
+           # $table->foreign('Category_id')->references('id')->on('categorie')->onDelete('cascade');
+           $table->foreignId("category_id")
+           ->references("id")
+           ->on("categories")
+           ->onDelete("cascade")
+           ->onUpdate("cascade");
             $table->timestamps();});}
           
 

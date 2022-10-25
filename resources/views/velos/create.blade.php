@@ -17,8 +17,9 @@
         </header>
         <div class="card-content">
             <div class="content">
-<form method="post" action="{{ route('velos.store') }}" enctype="multipart/form-data">
+<form method="post" action="{{ url('/velos')}}" enctype="multipart/form-data">
 @csrf
+<input type="hidden" name="category_id" id="category_id" value="{{$categories->id}}" id="category_id" />
                     <div class="form-group">
                         <label for="marque">Marque</label>
                         <input type="texte" class="form-control" id="marque"
@@ -27,8 +28,8 @@
 
                     </div>
                     <div class="form-group">
-                        <label for="description">Modele</label>
-                        <textarea class="form-control" id="madele" rows="3" name="modele"></textarea>
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" rows="3" name="description"></textarea>
 
                     </div>
                     <input 

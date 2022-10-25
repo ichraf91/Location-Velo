@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Expr\FuncCall;
 use App\Http\Controllers\VeloController;
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,5 +30,13 @@ Route::get('/page3/{name}', function ($name) {
     return '<h1> welcome '.$name.' </h1>';
 })->where ('name','[A-Za-z]+');
 
-Route::resource('velos','App\Http\Controllers\VeloController');
-#Route::resource('velos',VeloController::class);
+#Route::resource('velos','App\Http\Controllers\VeloController');
+#Route::resource('category','App\Http\Controllers\CategoryController');
+Route::resource('/velos', VeloController::class);
+Route::resource('/category', CategoryController::class);
+
+Route::get('/category/velos/{id}/create', [VeloController::class,'create']);
+
+Route::get('/category/velos/{id}', [VeloController::class,'index']);
+Route::get('/category/velos/{id}/edit', [VeloController::class,'edit']);
+Route::get('/category/velos/{id}', [VeloController::class,'index']);
