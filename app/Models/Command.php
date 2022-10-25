@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Command extends Model
 {
-   // use HasFactory;
+   use HasFactory;
    protected $guarded = [];
    public function user()
    {
