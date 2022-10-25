@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CategorieBalade;
+use App\Models\Balade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -73,6 +74,25 @@ class CategorieBaladeController extends Controller
             return view('catBalade.show')->with('catbalade', $catbalade);
         }else{
             return redirect()->route('catBalade.index')->with('error', 'Catégorie de balade introuvable');
+        }
+        
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\CategorieBalade  $categorieBalade
+     * @return \Illuminate\Http\Response
+     */
+    public function findBaladesbyCategorieBaladeId($id)
+    {
+        $catbalade = CategorieBalade::find($id);
+        if (isset($catbalade)) {
+        //retrieve all balades where CategorieBalade_id = id and where status = Started
+            $balades = Balade::where('CategorieBalade_id', $id)->where('status', 'Started')->order_by('price')->get();
+            return view('baladesclient.index')->with('balades', $balades);
+        }else{
+            return redirect()->route('catBalade.index')->with('error', 'Catégorie de balade vide');
         }
         
     }

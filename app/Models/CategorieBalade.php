@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class CategorieBalade extends Model
 {
     use HasFactory;
@@ -20,6 +21,9 @@ class CategorieBalade extends Model
     protected $casts = [
         'status' => BaladeStatus::class
     ];
+
+    
+    
 
 
 }
