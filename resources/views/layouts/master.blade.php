@@ -30,6 +30,9 @@
             <a class="nav-link text-white" href="{{route('users.profile',auth()->user()->id)}}">{{auth()->user()->name}}</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link text-white" href="{{route('baladesadmin.index')}}">admin</a>
+          </li>
+          <li class="nav-item">
 <form action="{{route('users.logout')}}"method="post" >
 
 

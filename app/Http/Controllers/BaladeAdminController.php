@@ -23,7 +23,7 @@ class BaladeAdminController extends Controller
      */
     public function index()
     {
-        $balades = Balade::all();
+        $balades = Balade::paginate(4);
         return view('baladesadmin.index')->with('balades', $balades);
     }
 
