@@ -17,6 +17,9 @@ class CategorieBalade extends Model
         return $this->hasMany(Balade::class); 
     }
 
+    protected $casts = [
+        'status' => BaladeStatus::class
+    ];
 
 
 }
