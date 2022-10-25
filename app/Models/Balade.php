@@ -12,5 +12,11 @@ class Balade extends Model
     protected $table = 'balade';
     protected $primaryKey = 'id';
     protected $fillable = ['name', 'address', 'mobile'];
+
+    //has one CategorieBalades
+    public function categorieBalade()
+    {
+        return $this->belongsTo(CategorieBalade::class);
+    }
 }
 

@@ -14,18 +14,17 @@ class CreateBalade extends Migration
     public function up()
     {
         Schema::create('balade', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string("title")-> nullable();
+            $table->integer('categorie_balade_id')->unsigned()->nullable();
+            $table->foreign('categorie_balade_id')->references('id')->on('categorie_balades')->onDelete('cascade');
             $table->string("name")-> nullable();
             $table->string("address")-> nullable();
             $table->string("mobile")-> nullable();
             $table->string("description")-> nullable();
-            $table->string("image")-> nullable();
-            $table->string("category")-> nullable();
+            $table->string("image")->default("http://lorempixel.com/200/200");
             $table->string("quantity")-> nullable();
-            $table->string("price")-> nullable();
             $table->string("discount_price")-> nullable();          
-            $table->string('photo',255)->default('');
             $table->timestamps();
         });
     }

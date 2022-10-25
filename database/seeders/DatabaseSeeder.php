@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Bike;
 use App\Models\Command;
+use App\Models\CategorieBalade;
 use App\Models\Balade;
 class DatabaseSeeder extends Seeder
 {
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
     Command::factory(10)->create();
     User::factory(10)->create();
     Balade::factory(10)->create();
+    CategorieBalade::factory(10)->create();
 
         // \App\Models\User::factory(10)->create();
     }
