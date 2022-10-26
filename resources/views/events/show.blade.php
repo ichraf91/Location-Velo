@@ -49,12 +49,12 @@
                         @csrf
                         <div class="row mb-3">
                             <div class="col-sm-5">
-                                <input type="text" name="eventId" class="form-control" id="eventId" value="{{ $event->id }}"/>
+                                <input type="hidden" name="eventId" class="form-control" id="eventId" value="{{ $event->id }}"/>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-sm-5">
-                                <input type="text" name="userId" class="form-control" id="userId" value="{{ $userId }}"/>
+                                <input type="hidden" name="userId" class="form-control" id="userId" value="{{ $userId }}"/>
                             </div>
                         </div>
                         <div style="margin-left: 25%">

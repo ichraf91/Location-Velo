@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ParticipationController;
+use App\Http\Controllers\CategorieReclamationController;
+use App\Http\Controllers\ReclamationController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventsController;
@@ -18,7 +20,7 @@ use App\Http\Controllers\EventsController;
 //Route::get('/', function () {
 //    return view('welcome');
 //});
-Route::get('/', [EventsController::class, 'index']);
+Route::get('/', [UsersController::class, 'login'])->name('users.login');
 
 Route::resource('/events', EventsController::class);
 Route::resource('/participations', ParticipationController::class);
@@ -31,3 +33,7 @@ Route::get('/logout', [UsersController::class, 'logout'])->name('users.logout');
 Route::get('/register', [UsersController::class, 'create'])->name('users.register');
 Route::post('/register', [UsersController::class, 'register'])->name('users.register');
 Route::get('/user/{id}/profile', [UsersController::class, 'show'])->name('users.profile');
+
+Route::resource('/categorie', CategorieReclamationController::class);
+
+Route::resource('/reclamation', ReclamationController::class);

@@ -23,6 +23,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('participations.index') }}">Mes Participations</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('reclamation.index') }}">Liste des Reclamations</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('categorie.index') }}">Liste des Categories</a>
+            </li>
 
             <li class="nav-item">
                 <form action="{{route('users.logout')}}" method="get">
